@@ -10,12 +10,12 @@ while ! xdpyinfo -display :0; do
 done
 
 echo "-----------------------------------lxde-----------------------------"
-source $FREESURFER_HOME/SetUpFreeSurfer.sh
 DISPLAY=:0 startlxde &
 
 echo "-----------------------------------x11vnc-----------------------------"
 #TODO - -xrandr displays "Disabling -xrandr mode: display does not support X RANDR."
 #I think something needs to be compiled into x11vnc for it to work?
-x11vnc -forever -display :0 -xrandr -ncache_cr -nowf -passwd $X11VNC_PASSWORD
+x11vnc -forever -display :0 -passwd $X11VNC_PASSWORD 
+#x11vnc -forever -display :0 -xrandr -ncache_cr -nowf -passwd $X11VNC_PASSWORD
 
 
