@@ -17,12 +17,14 @@ RUN apt-get update && apt-get install -y \
 
 COPY mricrogl_linux.zip .
 RUN unzip mricrogl_linux.zip -d /
-RUN ls /mricrogl_lx #check
 
-ADD vnc.sh /opt
-CMD ["/opt/vnc.sh"]
+ADD virtualgl_2.5.2_amd64.deb /
+RUN dpkg -i /virtualgl_2.5.2_amd64.deb
 
-# Install autostart file for mricrogl
-RUN mkdir -p /root/.config/autostart
-ADD app.desktop /root/.config/autostart
+# Copy VNC script that handles restarts
+ADD startvnc.sh /
+ADD xstartup /root/.vnc/xstartup
+ENV USER=root X11VNC_PASSWORD=override
+
+CMD ["/startvnc.sh"]
 
