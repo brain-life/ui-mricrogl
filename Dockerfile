@@ -7,13 +7,10 @@ MAINTAINER Soichi Hayashis <hayashis@iu.edu>
 #   xvfb x11vnc vim lxde-core lxde-icon-theme lxterminal
 
 EXPOSE 5900
-
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
-    xvfb x11vnc vim \
-    lxde-core lxde-icon-theme lxterminal \
-    mesa-utils libgl1-mesa-dri curl unzip
+    vim mesa-utils tightvncserver xfce4 wmctrl
 
 COPY mricrogl_linux.zip .
 RUN unzip mricrogl_linux.zip -d /
