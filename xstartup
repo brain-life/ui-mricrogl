@@ -5,9 +5,17 @@ vglclient &
 
 XFCE_PANEL_MIGRATE_DEFAULT=true startxfce4 &
 
-vglrun /mricrogl_lx/MRIcroGL `find /input -name *.nii.gz` &
-sleep 1
-wmctrl -i -r 0x01400006 -b add,fullscreen
+cat << EOF > script
+BEGIN
+    LOADIMAGE('$(find /input -name *.nii.gz)')
+END.
+EOF
+vglrun /mricrogl_lx/MRIcroGL script &
+pid=$!
+echo $pid > /pid
 
-#run it for an hour
-sleep 3600
+#maximize!
+sleep 4
+id=`wmctrl -pl | grep " $pid " | cut -f 1 -d " "`
+wmctrl -i -r $id -b add,fullscreen
+
