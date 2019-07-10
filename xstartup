@@ -7,7 +7,7 @@ XFCE_PANEL_MIGRATE_DEFAULT=true startxfce4 &
 
 cat << EOF > script
 BEGIN
-    LOADIMAGE('$(find /input -name *.nii.gz)')
+    LOADIMAGE('$(find /input -name "*.nii.gz")')
 END.
 EOF
 vglrun /mricrogl_lx/MRIcroGL script &
